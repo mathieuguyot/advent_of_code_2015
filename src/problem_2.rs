@@ -3,13 +3,16 @@ use std::cmp;
 use std::fs;
 
 pub fn run_problem_2() {
-    let filename = "data/problem_2.txt";
-    let file_content = fs::read_to_string(filename)
-        .expect(&format!("Cannot open file \"{}\"", filename));
-    
+    let file_name = "data/problem_2.txt";
+    let file_content = fs::read_to_string(file_name)
+        .expect(&format!("Cannot open file \"{}\"", file_name));
+
     let dimensions: Vec<Dimension> = parse_str(&file_content);
     let total_square_feet_paper: u64 = dimensions.iter().map(&paper_surface).sum();
     let total_square_feet_ribbon: u64 = dimensions.iter().map(&ribbon_surface).sum();
+
+    assert_eq!(total_square_feet_paper, 1606483);
+    assert_eq!(total_square_feet_ribbon, 3842356);
 
     println!("PROBLEM 2");
     println!("  PART 1: {}", total_square_feet_paper);

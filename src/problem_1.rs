@@ -1,15 +1,18 @@
 use std::fs;
 
 pub fn run_problem_1() {
-    let filename = "data/problem_1.txt";
-    let file_content = fs::read_to_string(filename)
-        .expect(&format!("Cannot open file \"{}\"", filename));
+    let file_name = "data/problem_1.txt";
+    let file_content = fs::read_to_string(file_name)
+        .expect(&format!("Cannot open file \"{}\"", file_name));
     
     let (floor_counter, basement_index) = floor_computer(&file_content);
 
+    assert_eq!(floor_counter, 232);
+    assert_eq!(basement_index.unwrap(), 1783);
+
     println!("PROBLEM 1");
     println!("  PART 1: {}", floor_counter);
-    println!("  PART 2: {:?}", basement_index);
+    println!("  PART 2: {}", basement_index.unwrap());
 }
 
 fn floor_computer(data: &str) -> (i64, Option<usize>) {
